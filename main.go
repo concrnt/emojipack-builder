@@ -69,6 +69,10 @@ func main() {
 				continue
 			}
 
+			if file.Name() == "icon.png" {
+				continue
+			}
+
 			split := strings.Split(file.Name(), ".")
 			basename := split[0]
 
@@ -93,11 +97,18 @@ func main() {
 			)
 		}
 
+		iconURL := ""
+		if metadata.IconURL != "" {
+			iconURL = BaseURL + "/" + target + "/" + metadata.IconURL
+		} else {
+			iconURL = BaseURL + "/" + target + "/icon.png"
+		}
+
 		EmojiPack := EmojiPack{
 			Name:        metadata.Name,
 			Description: metadata.Description,
 			Credit:      metadata.Credit,
-			IconURL:     BaseURL + "/" + target + "/icon.png",
+			IconURL:     iconURL,
 			Emojis:      emojis,
 		}
 
