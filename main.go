@@ -24,9 +24,9 @@ type Emoji struct {
 func main() {
 
 	BaseURL := os.Getenv("BASE_URL")
-    if BaseURL == "" {
-        fmt.Println("Warn: BASE_URL is not set")
-    }
+	if BaseURL == "" {
+		fmt.Println("Warn: BASE_URL is not set")
+	}
 
 	var targets = []string{}
 	entries, err := os.ReadDir(".")
@@ -36,6 +36,9 @@ func main() {
 	for _, entry := range entries {
 		if entry.IsDir() {
 			dirname := entry.Name()
+			if dirname[0] == '.' {
+				continue
+			}
 			targets = append(targets, dirname)
 		}
 	}
@@ -69,10 +72,10 @@ func main() {
 			split := strings.Split(file.Name(), ".")
 			basename := split[0]
 
-            extension := split[len(split)-1]
-            if extension == "json" {
-                continue
-            }
+			extension := split[len(split)-1]
+			if extension == "json" {
+				continue
+			}
 
 			names := strings.Split(basename, "-")
 			aliases := make([]string, 0)
@@ -90,7 +93,7 @@ func main() {
 			)
 		}
 
-		EmojiPack := EmojiPack {
+		EmojiPack := EmojiPack{
 			Name:        metadata.Name,
 			Description: metadata.Description,
 			Credit:      metadata.Credit,
