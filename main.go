@@ -82,6 +82,7 @@ func main() {
 			}
 
 			names := strings.Split(basename, "-")
+			name := names[0]
 			aliases := make([]string, 0)
 			if len(names) > 1 {
 				aliases = names[1:]
@@ -90,7 +91,7 @@ func main() {
 			emojis = append(
 				emojis,
 				Emoji{
-					Shortcode: basename,
+					Shortcode: name,
 					ImageURL:  BaseURL + "/" + target + "/" + file.Name(),
 					aliases:   aliases,
 				},
